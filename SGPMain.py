@@ -62,9 +62,33 @@ def takeCommand():
     return query 
 
 #===================================================================================================================================
+def Recogniting(query, VAName):
+    if "wikipedia" in query:
+        print(f"{VAName} : Serching wikipedia...")
+        query = query.replace("wikipedia","")
+        results = wikipedia.summary(query,2)
+        print(results)
+        speak(f"Accoding to wikipedia {results}")
+    
+    elif "open youtube" in query:
+        print(f"{VAName} : Opening youtube")
+        speak("Opening youtube")
+        webbrowser.open('http://www.youtube.com')
+
+    elif "open google" in query:
+        print(f"{VAName} : Opening google")
+        speak("Opening google")
+        webbrowser.open('http://www.google.com')
+    
+    elif "open brave" in query:
+        print(f"{VAName} : Opening brave")
+        speak("Opening brave")
+        webbrowser.open('http://www.brave.com')
+#===================================================================================================================================
 # ------------------------------ Main part ---------------------------
 if __name__ == '__main__':
     VAName = "RDX".lower()
     wishMe(VAName)
     query = takeCommand().lower()
+    Recogniting(query, VAName)
     
