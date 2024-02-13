@@ -63,27 +63,26 @@ def takeCommand():
 
 #===================================================================================================================================
 def Recogniting(query, VAName):
-    if "wikipedia" in query:
-        print(f"{VAName} : Serching wikipedia...")
-        query = query.replace("wikipedia","")
-        results = wikipedia.summary(query,2)
-        print(results)
-        speak(f"Accoding to wikipedia {results}")
-    
-    elif "open youtube" in query:
-        print(f"{VAName} : Opening youtube")
-        speak("Opening youtube")
-        webbrowser.open('http://www.youtube.com')
+    if 'google' in query:
+        from webTask import searchGoogle
+        searchGoogle(query)
 
-    elif "open google" in query:
-        print(f"{VAName} : Opening google")
-        speak("Opening google")
-        webbrowser.open('http://www.google.com')
+    elif 'youtube' in query:
+        from  webTask import searchYoutube
+        searchYoutube(query)
     
-    elif "open brave" in query:
-        print(f"{VAName} : Opening brave")
-        speak("Opening brave")
-        webbrowser.open('http://www.brave.com')
+    elif 'wikipedia' in query:
+        from webTask import searchWikipedia
+        searchWikipedia(query)
+    
+    elif "the time" in query:
+        strTime = datetime.datetime.now().strftime("%H:%M:%S")
+        print(f"{VAName} : the time is {strTime}")
+        speak(f"the time is {strTime}")
+
+    else:
+        from NormalConversation import Conversetion
+        Conversetion(query)
 #===================================================================================================================================
 # ------------------------------ Main part ---------------------------
 if __name__ == '__main__':
