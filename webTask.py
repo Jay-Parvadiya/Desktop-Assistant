@@ -35,6 +35,7 @@ def searchYoutube(query):
         webbrowser.open(webpath)
         print(f'{VAName} : This is what i found on youtube')
         speak("this is what i found on youtube")
+        
 #=====================================================================================================================
 def searchWikipedia(query):
     if 'open wikipedia' in query:
