@@ -45,7 +45,6 @@ def takeCommand():
         r.energy_threshold = 100
         audio = r.listen(source,timeout=60,phrase_time_limit=60)    # for convert voice to text
         
-
     try: 
         print("Recognizing...")
         query = r.recognize_google(audio)   
@@ -63,6 +62,8 @@ def takeCommand():
 
 #===================================================================================================================================
 def Recogniting(query, VAName):
+
+    media_control = ['incress volume', 'decress volume', 'play', 'paush', 'mute', 'play next', 'play previous']
     if 'google' in query:
         from webTask import searchGoogle
         searchGoogle(query)
@@ -75,10 +76,22 @@ def Recogniting(query, VAName):
         from webTask import searchWikipedia
         searchWikipedia(query)
     
+    elif 'open' in query:
+        from DesktopTask import openApp
+        openApp(query)
+    
+    elif 'close' in query:
+        from DesktopTask import closeApp
+        closeApp(query)
+    
     elif "the time" in query:
         strTime = datetime.datetime.now().strftime("%H:%M:%S")
         print(f"{VAName} : the time is {strTime}")
         speak(f"the time is {strTime}")
+    
+    elif query in media_control:
+        from keyboardTask import mediaControl
+        mediaControl(query)
 
     else:
         from NormalConversation import Conversetion
@@ -90,6 +103,6 @@ VAName = "RDX".lower()
 if __name__ == '__main__':
     # wishMe(VAName)
     query = takeCommand().lower()
-    query = query.lower()
+    
     Recogniting(query, VAName)
     

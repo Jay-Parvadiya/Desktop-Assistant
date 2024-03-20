@@ -27,9 +27,11 @@ def Conversetion(query):
         print(f"{VAName} : ",answer)
         speak(answer)
         exit()
+
     elif query in ['who are you','who r u','hu r u']:
         print(f'{VAName} : I am a Virtual Assistant developed by AI Developers\n')
         speak("I am a Virtual Assistant developed by AI Developers")
+        
     else:
         answer = chat_with_gpt(query)
         print(f"{VAName} :",answer)
@@ -37,7 +39,7 @@ def Conversetion(query):
      
 if __name__ == '__main__':
 
-    query = takeCommand()
+    query = takeCommand().lower()
     Conversetion(query)
 
 
