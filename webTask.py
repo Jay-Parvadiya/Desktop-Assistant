@@ -21,7 +21,7 @@ def searchGoogle(query):
 
 #=====================================================================================================================
 def searchYoutube(query):
-    if 'open  youtube' in query:
+    if 'open youtube' in query:
         print(f"{VAName} : Opening youtube")
         speak("Opening youtube")
         webbrowser.open('http://www.youtube.com')

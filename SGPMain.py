@@ -1,12 +1,12 @@
 import pyttsx3 as ptt             # This module is use for convert text-to-speech 
 import datetime                   # This module is use for import date and time   
 import speech_recognition as sr   # This module is use for convert spoken word into text 
-import wikipedia                  # This module is use for searching and retrieving information from Wikipedia.
-import webbrowser                 # This module is use for automating web browsing tasks in Python
-import os                         # This module is use for for interacting with the operating system
-from PIL import Image, ImageGrab  # This module is use for taking screen shot
-import pyautogui as pauto         # This module is use for automate keybord and mouse with python programm
-import time
+# import wikipedia                  # This module is use for searching and retrieving information from Wikipedia.
+# import webbrowser                 # This module is use for automating web browsing tasks in Python
+# import os                         # This module is use for for interacting with the operating system
+# from PIL import Image, ImageGrab  # This module is use for taking screen shot
+# import pyautogui as pauto         # This module is use for automate keybord and mouse with python programm
+# import time
 #===================================================================================================================================
 
 engine = ptt.init('sapi5')  # Make instence of pyttsx3 module 
@@ -42,7 +42,7 @@ def takeCommand():
     with sr.Microphone() as source:
         print("Listening....")
         r.pause_threshold = 1
-        # r.energy_threshold = 100
+        r.energy_threshold = 100
         audio = r.listen(source,timeout=60,phrase_time_limit=60)    # for convert voice to text
         
 
@@ -83,11 +83,13 @@ def Recogniting(query, VAName):
     else:
         from NormalConversation import Conversetion
         Conversetion(query)
+        
 #===================================================================================================================================
 # ------------------------------ Main part ---------------------------
+VAName = "RDX".lower()
 if __name__ == '__main__':
-    VAName = "RDX".lower()
-    wishMe(VAName)
+    # wishMe(VAName)
     query = takeCommand().lower()
+    query = query.lower()
     Recogniting(query, VAName)
     
