@@ -144,7 +144,6 @@ def Recogniting(query, VAName):
 VAName = "ALEX".lower()
 if __name__ == '__main__':
     wishMe(VAName)
-    query = takeCommand().lower()
-    
-    Recogniting(query, VAName)
-    
+    while True:
+        query = takeCommand().lower()
+        Recogniting(query, VAName)
