@@ -4,8 +4,8 @@ import speech_recognition as sr   # This module is use for convert spoken word i
 # import wikipedia                  # This module is use for searching and retrieving information from Wikipedia.
 # import webbrowser                 # This module is use for automating web browsing tasks in Python
 # import os                         # This module is use for for interacting with the operating system
-# from PIL import Image, ImageGrab  # This module is use for taking screen shot
-# import pyautogui as pauto         # This module is use for automate keybord and mouse with python programm
+from PIL import Image, ImageGrab  # This module is use for taking screen shot
+import pyautogui         # This module is use for automate keybord and mouse with python programm
 # import time
 #===================================================================================================================================
 
@@ -93,15 +93,57 @@ def Recogniting(query, VAName):
         from keyboardTask import mediaControl
         mediaControl(query)
 
+    elif "take a screen shot" in query:
+        print(f"{VAName} Taking screen shot")
+        speak("Taking screenshot")
+        image  = ImageGrab.grab()
+        image.show()
+
+    elif "shutdown my pc" in query:
+        print(f'{VAName} : Shuting down')
+        speak('shutting down')
+        pyautogui.hotkey('win','x')
+        pyautogui.press('U',2)  
+
+    elif "restart my pc" in query:
+        print(f'{VAName} : Restarting')
+        speak('Restarting')
+        pyautogui.hotkey('win','x')
+        pyautogui.press('u')   
+        pyautogui.press('r') 
+
+    elif 'copy all' in query:
+        print(f'{VAName} : Coping all')
+        speak('Coping all')
+        pyautogui.keyDown('ctrl')
+        pyautogui.press('a')
+        pyautogui.sleep(0.5)
+        pyautogui.press('c')
+        pyautogui.keyUp('ctrl')
+
+    elif 'remove all file' in query:
+        print(f'{VAName} : Removing all file')
+        speak('Removing all file')
+        pyautogui.hotkey('ctrl','a')
+        pyautogui.press('delete')
+
+    elif 'remove all' in query:
+        print(f'{VAName} : Removing all')
+        speak('Removing all')
+        pyautogui.keyDown('ctrl')
+        pyautogui.press('a')
+        pyautogui.press('backspace')
+        pyautogui.keyUp('ctrl')
+
     else:
         from NormalConversation import Conversetion
         Conversetion(query)
         
 #===================================================================================================================================
 # ------------------------------ Main part ---------------------------
-VAName = "RDX".lower()
+VAName = "ALEX".lower()
 if __name__ == '__main__':
-    # wishMe(VAName)
+    wishMe(VAName)
     query = takeCommand().lower()
     
     Recogniting(query, VAName)
