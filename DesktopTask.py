@@ -81,7 +81,7 @@ def closeApp(query):
         print(e)
 #==========================================================================================================
 def whatsappTask(query):
-    if f"open whatsapp and send massage to" in query:  # This is use for massage anyone on whatsapp only # This only work when whatsapp is off and video call or voice call is off
+    if "open whatsapp and send message to" in query:  # This is use for massage anyone on whatsapp only # This only work when whatsapp is off and video call or voice call is off
         array = query.split()
         input_name = array[array.index('open') + 1] # This is use for take name of person for massage
         print(f"{VAName} : Opening {input_name}")
@@ -92,11 +92,12 @@ def whatsappTask(query):
         pyautogui.keyUp('win')
  
         if len(input_name)>0 :
+                pyautogui.sleep(2)
                 pyautogui.typewrite(input_name)
                 pyautogui.press('enter')
         else:
             print(f"{VAName} : No application name provided")
-        pyautogui.sleep(5)
+        pyautogui.sleep(3)
  
         input_name = array[array.index('to') + 1]
         pyautogui.typewrite(f'{input_name}')
@@ -114,8 +115,6 @@ def whatsappTask(query):
                 print(f'{VAName} : sending {query}')
                 speak(f'sending {query}')
                 pyautogui.press('enter') 
-
-
 
 #==========================================================================================================
 def shutdownPC(query):
