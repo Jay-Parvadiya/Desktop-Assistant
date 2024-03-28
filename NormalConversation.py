@@ -43,8 +43,3 @@ if __name__ == '__main__':
     Conversetion(query)
 
 
-# query = takeCommand().lower()
-
-# if 'hello' in query:
-#     print(f'{VAName} : Hello! How can I help you?')
-#     speak("Hello! How can I help you?")
