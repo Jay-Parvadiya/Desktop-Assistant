@@ -27,12 +27,15 @@ def speak(audio):
 def wishMe(VAName):
     hour = int(datetime.datetime.now().hour)    # Get current hour from date and time moudle
     if hour >= 0 and hour < 12:
+        print(f"{VAName} : Good Morning Sir")
         speak("good Morning sir")
     elif hour >= 12 and hour <18:
+        print(f"{VAName} : Good Afternoon Sir")
         speak("good Afternoon sir")
     elif hour >= 18 and hour <= 24:
+        print(f"{VAName} : Good Evening Sir")
         speak("Good evening sir")
-
+    print(f"{VAName} : How can i help you?")
     speak(f"I am {VAName}, How can i help you?")
 
 #===================================================================================================================================
@@ -89,16 +92,29 @@ def Recogniting(query, VAName):
         print(f"{VAName} : opening incognito tab " )
         speak(f"opening incognito tab")
         pyautogui.press('win')
+        time.sleep(1)
         pyautogui.typewrite('chrome')
+        time.sleep(0.5)
         pyautogui.press('enter')
+        time.sleep(0.5)
         pyautogui.press('tab') 
         pyautogui.press('enter')
         pyautogui.hotkey('ctrl','shift','n')  
+
+    elif  'whatsapp' in query:
+        from DesktopTask import whatsappTask
+        whatsappTask(query)
 
 
     elif 'open' in query:
         from DesktopTask import openApp
         openApp(query)
+        
+
+    elif 'close tab' in query:
+        print(f"{VAName} : closing tab")
+        speak("closing tab")
+        pyautogui.hotkey('ctrl','w') 
 
     
     elif 'close' in query:
@@ -119,10 +135,6 @@ def Recogniting(query, VAName):
         speak("changing tab")
         pyautogui.hotkey('alt','tab')
 
-    elif 'close tab' in query:
-        print(f"{VAName} : closing tab")
-        speak("closing tab")
-        pyautogui.hotkey('ctrl','w') 
 
 
     elif "take a screen shot" in query:
@@ -178,25 +190,37 @@ def Recogniting(query, VAName):
         from NormalConversation import Conversetion
         Conversetion(query)
         
+#===================================================================================================================================
+        
 def inputQuery(self):
     while True:
         query = takeCommand().lower()
         Recogniting(query, VAName)
-    
 #===================================================================================================================================
+# def stopProcess(query):
+#     if query=='stop':
+
+#      p2.close()        
+
+
+
+#===================================================================================================================================
+    
 # ------------------------------ Main part ---------------------------
 VAName = "ALEX".lower()
 if __name__ == '__main__':
     
     p1 = multiprocessing.Process(target=guiStart,args=(10,))
     p2 = multiprocessing.Process(target=inputQuery,args=(10,))
+    # p3 = multiprocessing.Process(target=stopProcess,args=(10,))
     p1.start()
     time.sleep(1)
     wishMe(VAName)
 
     p2.start()
-
+    # p3.start()
     p1.join()
     p2.join()
+    # p3.join()
     
    
