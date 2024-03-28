@@ -7,6 +7,8 @@ import os                         # This module is use for for interacting with 
 from PIL import Image, ImageGrab  # This module is use for taking screen shot
 import pyautogui         # This module is use for automate keybord and mouse with python programm
 import time
+import multiprocessing
+from DAGUI import guiStart
 #===================================================================================================================================
 
 engine = ptt.init('sapi5')  # Make instence of pyttsx3 module 
@@ -43,13 +45,13 @@ def takeCommand():
         print("Listening....")
         r.pause_threshold = 1
         r.energy_threshold = 100
-        audio = r.listen(source,timeout=4,phrase_time_limit=4)    # for convert voice to text
+        audio = r.listen(source,timeout=20,phrase_time_limit=20)    # for convert voice to text
         
     try: 
         print("Recognizing...")
         query = r.recognize_google(audio)   
         print(f"User said : {query}\n")
-
+    
     except Exception as e :
         print(e)
         print("Say that again please.")
@@ -140,11 +142,22 @@ def Recogniting(query, VAName):
         from NormalConversation import Conversetion
         Conversetion(query)
         
+def inputQuery(self):
+    while True:
+        query = takeCommand().lower()
+        Recogniting(query, VAName)
+    
 #===================================================================================================================================
 # ------------------------------ Main part ---------------------------
 VAName = "ALEX".lower()
 if __name__ == '__main__':
+    
+    p1 = multiprocessing.Process(target=guiStart,args=(10,))
+    p2 = multiprocessing.Process(target=inputQuery,args=(10,))
+    p1.start()
+    p2.start()
+
+    p1.join()
+    p2.join()
     wishMe(VAName)
-    while True:
-        query = takeCommand().lower()
-        Recogniting(query, VAName)
+   
