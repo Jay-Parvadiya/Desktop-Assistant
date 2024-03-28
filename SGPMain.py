@@ -1,12 +1,12 @@
 import pyttsx3 as ptt             # This module is use for convert text-to-speech 
 import datetime                   # This module is use for import date and time   
 import speech_recognition as sr   # This module is use for convert spoken word into text 
-# import wikipedia                  # This module is use for searching and retrieving information from Wikipedia.
-# import webbrowser                 # This module is use for automating web browsing tasks in Python
-# import os                         # This module is use for for interacting with the operating system
+import wikipedia                  # This module is use for searching and retrieving information from Wikipedia.
+import webbrowser                 # This module is use for automating web browsing tasks in Python
+import os                         # This module is use for for interacting with the operating system
 from PIL import Image, ImageGrab  # This module is use for taking screen shot
 import pyautogui         # This module is use for automate keybord and mouse with python programm
-# import time
+import time
 #===================================================================================================================================
 
 engine = ptt.init('sapi5')  # Make instence of pyttsx3 module 
@@ -43,7 +43,7 @@ def takeCommand():
         print("Listening....")
         r.pause_threshold = 1
         r.energy_threshold = 100
-        audio = r.listen(source,timeout=60,phrase_time_limit=60)    # for convert voice to text
+        audio = r.listen(source,timeout=4,phrase_time_limit=4)    # for convert voice to text
         
     try: 
         print("Recognizing...")
@@ -99,19 +99,20 @@ def Recogniting(query, VAName):
         image  = ImageGrab.grab()
         image.show()
 
-    elif "shutdown my pc" in query:
-        print(f'{VAName} : Shuting down')
-        speak('shutting down')
-        pyautogui.hotkey('win','x')
-        pyautogui.press('U',2)  
+    elif "shutdown this pc" in query:
+        from DesktopTask import shutdownPC
+        shutdownPC(query)
 
-    elif "restart my pc" in query:
+    elif "restart this pc" in query:
         print(f'{VAName} : Restarting')
         speak('Restarting')
-        pyautogui.hotkey('win','x')
-        pyautogui.press('u')   
-        pyautogui.press('r') 
+        os.system('shutdown /r') 
 
+    elif 'select all' in query:
+        print(f'{VAName} : selecting all')
+        speak('Selecting all')
+        pyautogui.hotkey('ctrl','a')
+        
     elif 'copy all' in query:
         print(f'{VAName} : Coping all')
         speak('Coping all')

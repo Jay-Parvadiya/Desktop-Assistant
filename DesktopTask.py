@@ -1,4 +1,4 @@
-from SGPMain import takeCommand,speak,VAName
+from SGPMain import speak,VAName
 import os
 import pyautogui
 from PIL import ImageGrab
@@ -70,49 +70,21 @@ def closeApp(query):
         print(e)
 
 #==========================================================================================================
-def dTask(query):
-    
-    if "take a screen shot" in query:
-        print(f"{VAName} Taking screen shot")
-        speak("Taking screenshot")
-        image  = ImageGrab.grab()
-        image.show()
+def shutdownPC(query):
+    if 'shutdown this pc in' in query:
+        time = query.split(' ')
+        time = time[time.index('in')+1]
+        print(f'{VAName} : Shutdown this pc in {time} second')
+        speak(f'shutdown this pc in {time} second')
+        os.system(f'shutdown /s /t {time} /c "Shutdown This PC in {time} Second"')
 
-    elif "shutdown my pc" in query:
-        print(f'{VAName} : Shuting down')
-        speak('shutting down')
-        pyautogui.hotkey('win','x')
-        pyautogui.press('U',2)  
+    elif 'force shutdown ths pc' in query:
+        time = query.split(' ')
+        time = time[time.index('in')+1]
+        print(f'{VAName} : Force Shutdown this pc in {time} second')
+        speak(f'force shutdown this pc in {time} second')
+        os.system(f'shutdown /s /f /t {time} /c "Shutdown This PC in {time} Second"')
 
-    elif "restart my pc" in query:
-        print(f'{VAName} : Restarting')
-        speak('Restarting')
-        pyautogui.hotkey('win','x')
-        pyautogui.press('u')   
-        pyautogui.press('r') 
-
-    elif 'copy all' in query:
-        print(f'{VAName} : Coping all')
-        speak('Coping all')
-        pyautogui.keyDown('ctrl')
-        pyautogui.press('a')
-        pyautogui.sleep(0.5)
-        pyautogui.press('c')
-        pyautogui.keyUp('ctrl')
-
-    elif 'remove all file' in query:
-        print(f'{VAName} : Removing all file')
-        speak('Removing all file')
-        pyautogui.hotkey('ctrl','a')
-        pyautogui.press('delete')
-
-    elif 'remove all' in query:
-        print(f'{VAName} : Removing all')
-        speak('Removing all')
-        pyautogui.keyDown('ctrl')
-        pyautogui.press('a')
-        pyautogui.press('backspace')
-        pyautogui.keyUp('ctrl')  
 
 #==========================================================================================================
         
