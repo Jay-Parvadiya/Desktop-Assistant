@@ -9,6 +9,7 @@ import pyautogui         # This module is use for automate keybord and mouse wit
 import time
 import multiprocessing
 from DAGUI import guiStart
+from pynput.keyboard import Key,Controller
 #===================================================================================================================================
 
 engine = ptt.init('sapi5')  # Make instence of pyttsx3 module 
@@ -16,6 +17,7 @@ voices = engine.getProperty('voices')   # Get voice from system
 # print(voices[0].id)
 engine.setProperty('voices',voices[0].id)   # Set voice 
 
+keyboard = Controller()
 #===================================================================================================================================
 # This function speak given audio string 
 def speak(audio):
@@ -68,16 +70,15 @@ def takeCommand():
 #===================================================================================================================================
 def Recogniting(query, VAName):
 
-    media_control = ['incress volume', 'decress volume', 'play', 'paush', 'mute', 'play next', 'play previous']
+    media_control = ['increase volume', 'decrease volume', 'play', 'paush', 'mute', 'play next', 'play previous']
     if 'google' in query:
         from webTask import searchGoogle
         searchGoogle(query)
 
-
     elif 'youtube' in query:
         from  webTask import searchYoutube
         searchYoutube(query)
-    
+
     elif 'wikipedia' in query:
         from webTask import searchWikipedia
         searchWikipedia(query)
@@ -125,7 +126,19 @@ def Recogniting(query, VAName):
         strTime = datetime.datetime.now().strftime("%H:%M:%S")
         print(f"{VAName} : the time is {strTime}")
         speak(f"the time is {strTime}")
+
+    elif 'increase volume' in query:
+        for i in range(2):
+            keyboard.press(Key.media_volume_up)
+            keyboard.release(Key.media_volume_up)
+            time.sleep(0.1)
     
+    elif 'decrease volume' in query:
+        for i in range(2):
+            keyboard.press(Key.media_volume_down)
+            keyboard.release(Key.media_volume_down)
+            time.sleep(0.1)
+
     elif query in media_control:
         from keyboardTask import mediaControl
         mediaControl(query)
@@ -134,8 +147,6 @@ def Recogniting(query, VAName):
         print(f"{VAName} : changing tab")
         speak("changing tab")
         pyautogui.hotkey('alt','tab')
-
-
 
     elif "take a screen shot" in query:
         print(f"{VAName} : Taking screen shot")
