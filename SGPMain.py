@@ -95,11 +95,18 @@ def Recogniting(query, VAName):
         from keyboardTask import mediaControl
         mediaControl(query)
 
+    elif 'change tab' in query:
+        pyautogui.hotkey('alt','tab')  
+
     elif "take a screen shot" in query:
         print(f"{VAName} Taking screen shot")
         speak("Taking screenshot")
         image  = ImageGrab.grab()
         image.show()
+
+    elif 'lock pc' in query:
+        pyautogui.hotkey('win','l')  
+    
 
     elif "shutdown this pc" in query:
         from DesktopTask import shutdownPC
@@ -155,9 +162,12 @@ if __name__ == '__main__':
     p1 = multiprocessing.Process(target=guiStart,args=(10,))
     p2 = multiprocessing.Process(target=inputQuery,args=(10,))
     p1.start()
+    time.sleep(1)
+    wishMe(VAName)
+
     p2.start()
 
     p1.join()
     p2.join()
-    wishMe(VAName)
+    
    
