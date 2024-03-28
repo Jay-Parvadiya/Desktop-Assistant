@@ -70,6 +70,7 @@ def Recogniting(query, VAName):
         from webTask import searchGoogle
         searchGoogle(query)
 
+
     elif 'youtube' in query:
         from  webTask import searchYoutube
         searchYoutube(query)
@@ -78,9 +79,27 @@ def Recogniting(query, VAName):
         from webTask import searchWikipedia
         searchWikipedia(query)
     
+    elif "open brave" in query:
+        print(f"{VAName} : Opening brave")
+        speak("Opening brave")
+        webbrowser.open('http://www.brave.com') 
+        
+           
+    elif 'open incognito tab' in query:
+        print(f"{VAName} : opening incognito tab " )
+        speak(f"opening incognito tab")
+        pyautogui.press('win')
+        pyautogui.typewrite('chrome')
+        pyautogui.press('enter')
+        pyautogui.press('tab') 
+        pyautogui.press('enter')
+        pyautogui.hotkey('ctrl','shift','n')  
+
+
     elif 'open' in query:
         from DesktopTask import openApp
         openApp(query)
+
     
     elif 'close' in query:
         from DesktopTask import closeApp
@@ -96,15 +115,25 @@ def Recogniting(query, VAName):
         mediaControl(query)
 
     elif 'change tab' in query:
-        pyautogui.hotkey('alt','tab')  
+        print(f"{VAName} : changing tab")
+        speak("changing tab")
+        pyautogui.hotkey('alt','tab')
+
+    elif 'close tab' in query:
+        print(f"{VAName} : closing tab")
+        speak("closing tab")
+        pyautogui.hotkey('ctrl','w') 
+
 
     elif "take a screen shot" in query:
-        print(f"{VAName} Taking screen shot")
+        print(f"{VAName} : Taking screen shot")
         speak("Taking screenshot")
         image  = ImageGrab.grab()
         image.show()
 
     elif 'lock pc' in query:
+        print(f"{VAName} : pc locked ")
+        speak("pc locked ")
         pyautogui.hotkey('win','l')  
     
 
