@@ -37,8 +37,16 @@ root.minsize(395,460)
 root.maxsize(395,460)
 root.resizable(False,False)
 root.config(bg="#fcfcfc")
+# Set the window to be always on top (ensure compatibility)
+try:
+    root.attributes('-topmost', True)  # Try Tkinter approach first
+except Tk.TclError:
+    try:
+        root.wm_attributes('-topmost', True)  # Try wm_attributes if necessary
+    except Exception as e:
+        print("Error setting 'always on top':", e)
+        
 text=Text(root,font = ('courier 10'),bg="#000000",borderwidth=3,relief=SOLID,fg='#fcfcfc')
-
 text.grid(row=2,column=0)
 text.place(x=0,y=365,width=400,height=100)
 
