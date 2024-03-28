@@ -81,7 +81,7 @@ def closeApp(query):
         print(e)
 #==========================================================================================================
 def whatsappTask(query):
-    if f"{VAName} open whatsapp and send massage to" in query:  # This is use for massage anyone on whatsapp only # This only work when whatsapp is off and video call or voice call is off
+    if f"open whatsapp and send massage to" in query:  # This is use for massage anyone on whatsapp only # This only work when whatsapp is off and video call or voice call is off
         array = query.split()
         input_name = array[array.index('open') + 1] # This is use for take name of person for massage
         print(f"{VAName} : Opening {input_name}")
