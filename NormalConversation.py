@@ -29,10 +29,10 @@ def Conversetion(query):
         try:
             os.system(f'taskkill /f /im python.exe')
         except Exception as e:
+            exit()
             print(f'{VAName} : Somthing is wrong')
             speak('Somthig is wrong')
             print(e)
-            exit()
 
     elif query in ['who are you','who r u','hu r u']:
         print(f'{VAName} : I am a Virtual Assistant developed by AI Developers\n')
