@@ -39,6 +39,11 @@ def openApp(query):
         pyautogui.sleep(0.5)
         pyautogui.press('y')
 
+    elif 'open voice typing' in query:
+        print(f'{VAName} : Opening Voice typing')
+        speak('Opening voice typing')
+        pyautogui.hotkey('win','h')
+
     elif 'open clipboard' in query:
         print(f'{VAName} : Opening Clipboard')
         speak('Opening Clipboard')
@@ -69,16 +74,31 @@ def openApp(query):
                 speak(f" something wrong ")
 #==========================================================================================================
 def closeApp(query):
-    app_name = query.split(' ')
-    app_name = app_name[app_name.index('close') + 1]
-    print(f'{VAName} : Closing {app_name}')
-    speak(f"Closing {app_name}")
-    try:
-        os.system(f'taskkill /f /im {app_name}.exe')
-    except Exception as e:
-        print(f'{VAName} : {app_name} not found')
-        speak(f'{app_name} not found')
-        print(e)
+      if 'close current app' in query:
+        print(f'{VAName} : closing ')
+        speak('closing')
+        pyautogui.hotkey('alt','f4')
+      else:
+        app_name = query.split(' ')
+        app_name = app_name[app_name.index('close') + 1]
+        print(f'{VAName} : Closing {app_name}')
+        speak(f"Closing {app_name}")
+        try:
+            os.system(f'taskkill /f /im {app_name}.exe')
+        except Exception as e:
+            print(f'{VAName} : {app_name} not found')
+            speak(f'{app_name} not found')
+            print(e)
+            app_name = query.split(' ')
+            app_name = app_name[app_name.index('close') + 1]
+            print(f'{VAName} : Closing {app_name}')
+            speak(f"Closing {app_name}")
+        try:
+            os.system(f'taskkill /f /im {app_name}.exe')
+        except Exception as e:
+              print(f'{VAName} : {app_name} not found')
+              speak(f'{app_name} not found')
+              print(e)
 #==========================================================================================================
 def whatsappTask(query):
     if "open whatsapp and send message to" in query:  # This is use for massage anyone on whatsapp only # This only work when whatsapp is off and video call or voice call is off
@@ -92,11 +112,13 @@ def whatsappTask(query):
         pyautogui.keyUp('win')
  
         if len(input_name)>0 :
+                pyautogui.sleep(2)
                 pyautogui.typewrite(input_name)
                 pyautogui.press('enter')
         else:
             print(f"{VAName} : No application name provided")
-        pyautogui.sleep(5)
+            pyautogui.sleep(3)
+            
  
         input_name = array[array.index('to') + 1]
         pyautogui.typewrite(f'{input_name}')
@@ -115,29 +137,7 @@ def whatsappTask(query):
                 speak(f'sending {query}')
                 pyautogui.press('enter')
     else:
-        app_name = query.split(' ')
-        try:
-             
-            app_name = app_name[app_name.index('open') + 1]
-        except Exception as e:
-             print(f"{VAName} : No application name provided")
-             speak(f" something wrong ") 
-             
-        print(f'{VAName} : Opening {app_name}')
-        speak(f"Opening {app_name}")
-        #try:
-            #os.system(f'start {app_name}')
-        #except Exception as e:
-        pyautogui.press('win')
-            
-        if len(app_name)>0 :
-                pyautogui.typewrite(app_name)
-                pyautogui.sleep(0.5)
-                pyautogui.press('enter')
-        else:
-                print(f"{VAName} : No application name provided")
-                speak(f" something wrong ")
-                
+        openApp(query='open whatsapp')
 
 
 
