@@ -1,6 +1,6 @@
 from SGPMain import takeCommand,speak,VAName
 import openai
-
+import os
 openai.api_key = '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'
 
 # This function interct with chatGPT and generat answer  based on user input
@@ -26,7 +26,13 @@ def Conversetion(query):
         answer = chat_with_gpt(query)
         print(f"{VAName} : ",answer)
         speak(answer)
-        exit()
+        try:
+            os.system(f'taskkill /f /im python.exe')
+        except Exception as e:
+            print(f'{VAName} : Somthing is wrong')
+            speak('Somthig is wrong')
+            print(e)
+            exit()
 
     elif query in ['who are you','who r u','hu r u']:
         print(f'{VAName} : I am a Virtual Assistant developed by AI Developers\n')
