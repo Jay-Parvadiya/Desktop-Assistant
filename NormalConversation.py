@@ -26,14 +26,15 @@ def Conversetion(query):
         answer = chat_with_gpt(query)
         print(f"{VAName} : ",answer)
         speak(answer)
-        try:
-            os.system(f'taskkill /f /im python.exe')
-        except Exception as e:
-            exit()
-            print(f'{VAName} : Somthing is wrong')
-            speak('Somthig is wrong')
-            print(e)
-
+        exit()
+        # # try:
+        #     os.system(f'taskkill /f /im python3.12.exe')
+        # # except Exception as e:
+        #     exit()
+        #     print(f'{VAName} : Somthing is wrong')
+        #     speak('Somthig is wrong')
+        #     print(e)
+    
     elif query in ['who are you','who r u','hu r u']:
         print(f'{VAName} : I am a Virtual Assistant developed by AI Developers\n')
         speak("I am a Virtual Assistant developed by AI Developers")
