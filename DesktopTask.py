@@ -74,16 +74,22 @@ def openApp(query):
                 speak(f" something wrong ")
 #==========================================================================================================
 def closeApp(query):
-    app_name = query.split(' ')
-    app_name = app_name[app_name.index('close') + 1]
-    print(f'{VAName} : Closing {app_name}')
-    speak(f"Closing {app_name}")
-    try:
-        os.system(f'taskkill /f /im {app_name}.exe')
-    except Exception as e:
-        print(f'{VAName} : {app_name} not found')
-        speak(f'{app_name} not found')
-        print(e)
+    
+    if 'close current app' in query:
+        print(f'{VAName} : closing ')
+        speak('closing')
+        pyautogui.hotkey('alt','f4')
+    else:
+        app_name = query.split(' ')
+        app_name = app_name[app_name.index('close') + 1]
+        print(f'{VAName} : Closing {app_name}')
+        speak(f"Closing {app_name}")
+        try:
+            os.system(f'taskkill /f /im {app_name}.exe')
+        except Exception as e:
+            print(f'{VAName} : {app_name} not found')
+            speak(f'{app_name} not found')
+            print(e)
 #==========================================================================================================
 def whatsappTask(query):
     if "open whatsapp and send message to" in query:  # This is use for massage anyone on whatsapp only # This only work when whatsapp is off and video call or voice call is off
