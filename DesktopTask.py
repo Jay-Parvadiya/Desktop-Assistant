@@ -38,6 +38,11 @@ def openApp(query):
         pyautogui.hotkey('win','x')
         pyautogui.sleep(0.5)
         pyautogui.press('y')
+    
+    elif 'open voice typing' in query:
+        print(f'{VAName} : Opening Voice typing')
+        speak('Opening voice typing')
+        pyautogui.hotkey('win','h')
 
     elif 'open clipboard' in query:
         print(f'{VAName} : Opening Clipboard')
