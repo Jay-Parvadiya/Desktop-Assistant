@@ -7,4 +7,4 @@ A desktop assistant is a software tool crafted to aid users in managing tasks on
 1. Install pyton file and install requriment
 2. Run SGPMain.py file
 3. Ask somthing
-4. You have to put yoru API key for use of AI
+4. You have to put your API key for use of AI
